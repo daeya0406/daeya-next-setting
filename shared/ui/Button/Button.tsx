@@ -1,6 +1,6 @@
 import { type ButtonHTMLAttributes } from "react";
-import { buttonStyles, type ButtonVariants } from "./styles";
-import { Loading } from "@/shared/ui/loading";
+import { buttonStyles, type ButtonVariants } from "./Button.styles";
+import { Loading } from "@/shared/ui/Loading";
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonVariants {

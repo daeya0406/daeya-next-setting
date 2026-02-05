@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, ReactNode, useId } from "react";
-import { inputStyles, type InputVariants } from "./styles";
+import { inputStyles, type InputVariants } from "./Input.styles";
 import { cn } from "@/lib/utils";
 
 interface InputProps

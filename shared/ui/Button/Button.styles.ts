@@ -1,11 +1,10 @@
-// shared/ui/button/styles.ts
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const buttonStyles = tv({
   slots: {
     root: [
       "inline-flex items-center justify-center select-none cursor-pointer transition-all",
-      "active:scale-95", // 클릭 시 살짝 작아지는 모션
+      "active:scale-95", // 클릭 시 살짝 작아지게
       "disabled:cursor-not-allowed disabled:opacity-50 disabled:grayscale-[50%] disabled:active:scale-100",
       // 커서 변경, 투명도 조절, 회색조 추가, 클릭 애니메이션 제거
     ],

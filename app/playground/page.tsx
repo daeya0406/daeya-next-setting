@@ -1,124 +1,141 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/shared/ui/button";
-import { Icon } from "@/shared/ui/icons";
-import { Input } from "@/shared/ui/input";
+import React, { useState } from "react";
+import { Select } from "@/shared/ui/Select";
+import { Card } from "@/shared/ui/Card";
+import { Modal } from "@/shared/ui/Modal";
+import { Popover } from "@/shared/ui/Popover";
 
-export default function Playground() {
-  const [isLoading, setIsLoading] = useState(false);
+export default function UIPlayground() {
+  const [value, setValue] = useState("");
 
   return (
-    <div className="p-10 space-y-10">
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold border-b pb-2">
-          1. Button Variants & Colors
-        </h2>
-        <div className="flex flex-wrap gap-4 items-end">
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="outline">Outline</Button>
-          <Button variant="ghost">Ghost</Button>
-          <div data-theme="purple">
-            <Button>Purple Theme</Button>
-          </div>
-        </div>
-      </section>
+    <div className="p-10 space-y-12 bg-[#fafafa] min-h-screen">
+      <header className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          Playground
+        </h1>
+        <p className="text-gray-500 text-lg">기본 컴포넌트 테스트</p>
+      </header>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold border-b pb-2">
-          2. Radius & Sizes
-        </h2>
-        <div className="flex flex-wrap gap-4 items-center">
-          <Button radius="sm" size="sm">
-            Small & Sharp
-          </Button>
-          <Button radius="md" size="md">
-            Medium (Default)
-          </Button>
-          <Button radius="lg" size="lg">
-            Large & Round
-          </Button>
-          <Button radius="full" size="md">
-            Full Radius
-          </Button>
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold border-b pb-2">
-          3. Icon Composition (자유 조립)
-        </h2>
-        <div className="flex flex-wrap gap-4 items-center">
-          <Button className="gap-2">
-            <Icon name="check" size={16} />
-            확인
-          </Button>
-          <Button
-            variant="outline"
-            className="gap-2 text-red-500 border-red-200"
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* 1. Modal 테스트 섹션 */}
+        <div className="space-y-6">
+          <h2 className="text-xl font-semibold flex items-center gap-2">
+            <span className="w-1.5 h-6 bg-purple-500 rounded-full" />
+            Modal (Dialog)
+          </h2>
+          <Card
+            size="md"
+            className="flex flex-col items-center justify-center py-12"
           >
-            <Icon name="trash" size={16} />
-            삭제
-          </Button>
-          <Button size="icon" variant="secondary">
-            <Icon name="pencil" size={20} />
-          </Button>
+            <Modal>
+              <Modal.Trigger className="px-6 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-all shadow-lg active:scale-95">
+                프로필 수정하기
+              </Modal.Trigger>
+              <Modal.Content>
+                <Modal.Header>
+                  <Modal.Title>프로필 정보 수정</Modal.Title>
+                  <Modal.Description>
+                    변경사항을 입력한 후 저장 버튼을 눌러주세요.
+                  </Modal.Description>
+                </Modal.Header>
+
+                <div className="py-4 space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">이름</label>
+                    <input
+                      className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm"
+                      placeholder="이름을 입력하세요"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">권한 설정</label>
+                    <Select placeholder="권한을 선택하세요">
+                      <Select.Item value="admin">Admin</Select.Item>
+                      <Select.Item value="user">User</Select.Item>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2">
+                  <button className="px-4 py-2 text-sm font-medium border rounded-lg hover:bg-gray-50">
+                    취소
+                  </button>
+                  <button className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    변경사항 저장
+                  </button>
+                </div>
+              </Modal.Content>
+            </Modal>
+            <p className="mt-4 text-xs text-gray-400">
+              Modal 내부에 Select를 넣어 중첩 UI도 테스트 가능합니다.
+            </p>
+          </Card>
         </div>
-      </section>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold border-b pb-2">
-          4. Interaction & Loading
-        </h2>
-        <div className="flex flex-wrap gap-4 items-center">
-          <Button
-            isLoading={isLoading}
-            onClick={() => {
-              setIsLoading(true);
-              setTimeout(() => setIsLoading(false), 2000);
-            }}
-          >
-            클릭해서 로딩 테스트 (2초)
-          </Button>
+        {/* 2. Popover & Select 테스트 섹션 */}
+        <div className="space-y-6">
+          <h2 className="text-xl font-semibold flex items-center gap-2">
+            <span className="w-1.5 h-6 bg-amber-500 rounded-full" />
+            Popover & Select
+          </h2>
+          <Card size="md" className="space-y-8">
+            {/* Popover */}
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-gray-700">
+                상세 설정 (Popover)
+              </label>
+              <div>
+                <Popover>
+                  <Popover.Trigger className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 flex items-center gap-2">
+                    필터 설정 <span className="text-xs opacity-50">▼</span>
+                  </Popover.Trigger>
+                  <Popover.Content align="start" className="w-64">
+                    <div className="space-y-4">
+                      <p className="font-semibold text-sm">데이터 필터</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span>최근 7일 데이터 포함</span>
+                          <div className="w-8 h-4 bg-blue-500 rounded-full" />
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span>비공개 항목 제외</span>
+                          <div className="w-8 h-4 bg-gray-200 rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+                  </Popover.Content>
+                </Popover>
+              </div>
+            </div>
 
-          <Button disabled>Disabled State</Button>
+            {/* Select */}
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-gray-700">
+                기본 선택 (Select)
+              </label>
+              <Select
+                placeholder="도시를 선택하세요"
+                value={value}
+                onValueChange={setValue}
+              >
+                <Select.Item value="seoul">서울특별시 🇰🇷</Select.Item>
+                <Select.Item value="tokyo">도쿄 🇯🇵</Select.Item>
+                <Select.Item value="newyork">뉴욕 🇺🇸</Select.Item>
+              </Select>
+            </div>
+          </Card>
         </div>
-      </section>
+      </div>
 
-      <section className="space-y-4 max-w-sm">
-        <h2 className="text-xl font-semibold border-b pb-2">5. Input Fields</h2>
-
-        {/* 기본 인풋 */}
-        <Input label="이메일" placeholder="example@test.com" />
-
-        {/* 아이콘 + 인풋 */}
-        <Input
-          label="비밀번호"
-          type="password"
-          placeholder="비밀번호를 입력하세요"
-          leftSection={<Icon name="lock" size={16} />}
-          rightSection={
-            <Icon name="eye" size={16} className="cursor-pointer" />
-          }
-        />
-
-        {/* 에러 상태 인풋 */}
-        <Input
-          label="닉네임"
-          placeholder="홍길동"
-          error="이미 사용 중인 닉네임입니다."
-          leftSection={<Icon name="user" size={16} />}
-        />
-
-        {/* 비활성화 상태 */}
-        <Input
-          label="아이디"
-          value="daeya_admin"
-          disabled
-          leftSection={<Icon name="user" size={16} />}
-        />
-      </section>
+      {/* 바닥 확인용 */}
+      <footer className="py-10 text-center border-t border-gray-100">
+        <p className="text-sm text-gray-400 font-mono italic">
+          Design System v1.0 - All Core Layers (Select, Modal, Popover) are
+          Ready.
+        </p>
+      </footer>
     </div>
   );
 }

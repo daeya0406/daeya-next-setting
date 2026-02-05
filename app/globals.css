@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* tailwind 추가 적용 */
+@source "../app";
+@source "../shared";
+@source "../features";
+@source "../entities";
+
 @theme {
   /* 폰트 등록 */
   --font-sans: var(--font-pretendard), ui-sans-serif, system-ui, sans-serif;
@@ -34,7 +40,6 @@
 /* 기본 스타일 */
 @layer base {
   body {
-    /* 여기서 font-sans는 위 @theme에서 정의한 --font-sans를 호출 */
     @apply font-sans antialiased tracking-tight text-base;
     color: var(--color-foreground);
     background-color: var(--color-background);
@@ -53,13 +58,9 @@
     @apply text-base leading-relaxed;
   }
 
-  /* 크롬, 사파리, 엣지의 자동완성 배경색을 투명하게 강제 고정 */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-text-fill-color: inherit !important; /* 글자색 유지 */
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* 배경색을 투명으로 */
-    transition: background-color 5000s ease-in-out 0s !important; /* 색 변화 방지 */
+  /* 크롬, 사파리, 엣지의 자동완성 배경색 설정 */
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--background) inset !important;
+    -webkit-text-fill-color: var(--foreground) !important;
   }
 }

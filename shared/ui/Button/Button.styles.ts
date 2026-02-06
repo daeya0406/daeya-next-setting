@@ -14,7 +14,8 @@ export const buttonStyles = tv({
   variants: {
     variant: {
       primary: { root: "bg-primary text-white hover:opacity-90" },
-      secondary: {
+      secondary: { root: "bg-secondary text-white hover:opacity-90" },
+      tertiary: {
         root: "bg-white text-gray-900 border border-gray-200 hover:bg-gray-50",
       },
       outline: {

@@ -1,5 +1,6 @@
 import { pretendard } from "@/shared/fonts";
 import "./globals.css";
+import { ModalProvider } from "@/shared/ui/Modal";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <ModalProvider />
+      </body>
     </html>
   );
 }

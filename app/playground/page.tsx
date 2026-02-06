@@ -3,11 +3,13 @@
 import React, { useState } from "react";
 import { Select } from "@/shared/ui/Select";
 import { Card } from "@/shared/ui/Card";
-import { Modal } from "@/shared/ui/Modal";
+import { useModalStore } from "@/shared/store/useModalStore";
 import { Popover } from "@/shared/ui/Popover";
+import { Button } from "@/shared/ui/Button";
 
 export default function UIPlayground() {
   const [value, setValue] = useState("");
+  const { openModal } = useModalStore();
 
   return (
     <div className="p-10 space-y-12 bg-[#fafafa] min-h-screen">
@@ -19,62 +21,29 @@ export default function UIPlayground() {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* 1. Modal 테스트 섹션 */}
+        {/* Modal 테스트 섹션 */}
         <div className="space-y-6">
           <h2 className="text-xl font-semibold flex items-center gap-2">
             <span className="w-1.5 h-6 bg-purple-500 rounded-full" />
-            Modal (Dialog)
+            Global Controlled Modal
           </h2>
           <Card
             size="md"
             className="flex flex-col items-center justify-center py-12"
           >
-            <Modal>
-              <Modal.Trigger className="px-6 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-all shadow-lg active:scale-95">
-                프로필 수정하기
-              </Modal.Trigger>
-              <Modal.Content>
-                <Modal.Header>
-                  <Modal.Title>프로필 정보 수정</Modal.Title>
-                  <Modal.Description>
-                    변경사항을 입력한 후 저장 버튼을 눌러주세요.
-                  </Modal.Description>
-                </Modal.Header>
+            <Button
+              onClick={() => openModal("profile", { name: "사용자 이름" })}
+            >
+              프로필 수정 (이중 모달 테스트)
+            </Button>
 
-                <div className="py-4 space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">이름</label>
-                    <input
-                      className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm"
-                      placeholder="이름을 입력하세요"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">권한 설정</label>
-                    <Select placeholder="권한을 선택하세요">
-                      <Select.Item value="admin">Admin</Select.Item>
-                      <Select.Item value="user">User</Select.Item>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-2 pt-2">
-                  <button className="px-4 py-2 text-sm font-medium border rounded-lg hover:bg-gray-50">
-                    취소
-                  </button>
-                  <button className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    변경사항 저장
-                  </button>
-                </div>
-              </Modal.Content>
-            </Modal>
-            <p className="mt-4 text-xs text-gray-400">
-              Modal 내부에 Select를 넣어 중첩 UI도 테스트 가능합니다.
+            <p className="mt-4 text-xs text-gray-400 text-center">
+              Zustand 스토어를 통해 호출
             </p>
           </Card>
         </div>
 
-        {/* 2. Popover & Select 테스트 섹션 */}
+        {/* Popover & Select 테스트 섹션 */}
         <div className="space-y-6">
           <h2 className="text-xl font-semibold flex items-center gap-2">
             <span className="w-1.5 h-6 bg-amber-500 rounded-full" />

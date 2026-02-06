@@ -12,8 +12,19 @@ export const modalStyles = tv({
     title: "text-lg font-semibold leading-none tracking-tight",
     description: "text-sm text-gray-500",
     footer:
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 gap-2 mt-4",
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 gap-1 mt-4",
     close:
       "absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none",
+  },
+  variants: {
+    size: {
+      sm: { content: "max-w-sm" },
+      md: { content: "max-w-lg" },
+      lg: { content: "max-w-2xl" },
+      full: { content: "max-w-[95vw] h-[90vh]" },
+    },
+  },
+  defaultVariants: {
+    size: "md",
   },
 });

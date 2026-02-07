@@ -1,0 +1,28 @@
+import { cn } from '@/lib/utils';
+import type { PropsWithClassName } from '@/shared/types';
+
+interface SpinnerProps extends PropsWithClassName {
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const sizeClasses = {
+  sm: 'h-4 w-4 border-2',
+  md: 'h-8 w-8 border-4',
+  lg: 'h-12 w-12 border-4',
+};
+
+export function Spinner({ className, size = 'md' }: SpinnerProps) {
+  return (
+    <div
+      className={cn(
+        'border-primary animate-spin rounded-full border-t-transparent',
+        sizeClasses[size],
+        className
+      )}
+      role="status"
+      aria-label="Loading"
+    >
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+}

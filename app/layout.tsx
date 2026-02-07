@@ -1,6 +1,8 @@
-import { pretendard } from "@/shared/fonts";
-import "./globals.css";
-import { ModalProvider } from "@/shared/ui/Modal";
+import { pretendard } from '@/shared/fonts';
+import './globals.css';
+import { ModalProvider } from '@/shared/ui/Modal';
+import { ReactQueryProvider } from '@/lib/react-query';
+import { ToastProvider } from '@/shared/ui/Toast';
 
 export default function RootLayout({
   children,
@@ -10,8 +12,11 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable}>
       <body className="font-sans">
-        {children}
-        <ModalProvider />
+        <ReactQueryProvider>
+          {children}
+          <ModalProvider />
+          <ToastProvider />
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Select } from "@/shared/ui/Select";
 import { Card } from "@/shared/ui/Card";
 import { useModalStore } from "@/shared/store/useModalStore";

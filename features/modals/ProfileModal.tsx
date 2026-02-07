@@ -2,6 +2,7 @@
 import { Modal } from "@/shared/ui/Modal";
 import { Button } from "@/shared/ui/Button";
 import { useModalStore } from "@/shared/store/useModalStore";
+import { Section } from "@/shared/ui/Section/Section";
 
 export function ProfileModal({
   name,
@@ -13,7 +14,6 @@ export function ProfileModal({
   const { openModal, closeAllModals } = useModalStore();
 
   const handleOpenConfirm = () => {
-    // 여기서 "confirm" 타입의 모달을 스택에 하나 더 쌓기
     openModal("confirm", {
       title: "정말 삭제하시겠습니까?",
       message: "삭제된 프로필 정보는 복구할 수 없습니다.",
@@ -33,7 +33,7 @@ export function ProfileModal({
         <Modal.Title>프로필 수정</Modal.Title>
       </Modal.Header>
 
-      <div className="p-6">
+      <Section>
         <p>
           <strong>{name}</strong>님의 정보를 수정 중입니다.
         </p>
@@ -41,7 +41,7 @@ export function ProfileModal({
           className="border p-2 w-full mt-4 rounded-md"
           placeholder="이름 변경"
         />
-      </div>
+      </Section>
 
       <Modal.Footer>
         <Button variant="tertiary" onClick={onClose}>

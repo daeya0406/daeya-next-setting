@@ -1,8 +1,7 @@
-// features/profile/ui/ProfileModal.tsx
 import { Modal } from "@/shared/ui/Modal";
 import { Button } from "@/shared/ui/Button";
 import { useModalStore } from "@/shared/store/useModalStore";
-import { Section } from "@/shared/ui/Section/Section";
+import { Section } from "@/shared/ui/Section";
 
 export function ProfileModal({
   name,
@@ -47,7 +46,6 @@ export function ProfileModal({
         <Button variant="tertiary" onClick={onClose}>
           취소
         </Button>
-        {/* 삭제 버튼 클릭 시 확인 모달 호출 */}
         <Button variant="secondary" onClick={handleOpenConfirm}>
           삭제
         </Button>

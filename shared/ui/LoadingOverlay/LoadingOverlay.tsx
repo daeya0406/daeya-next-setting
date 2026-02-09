@@ -1,27 +1,28 @@
-import { Spinner } from '@/shared/ui/Spinner';
-import { cn } from '@/lib/utils';
-import type { PropsWithClassName } from '@/shared/types';
+import { Spinner } from "@/shared/ui/Spinner";
+import { loadingOverlayStyles } from "./LoadingOverlay.styles";
+import type { VariantProps } from "tailwind-variants";
 
-interface LoadingOverlayProps extends PropsWithClassName {
+// 💡 중요: tv에서 정의한 타입들을 자동으로 추출해서 props 타입으로 씁니다.
+type LoadingOverlayVariants = VariantProps<typeof loadingOverlayStyles>;
+
+interface LoadingOverlayProps extends LoadingOverlayVariants {
   text?: string;
-  fullScreen?: boolean;
+  className?: string;
 }
 
 export function LoadingOverlay({
   className,
-  text = '로딩 중...',
-  fullScreen = false,
+  text = "로딩 중...",
+  type, // tv의 variants에서 정의한 값 (absolute | fixed)
 }: LoadingOverlayProps) {
   return (
-    <div
-      className={cn(
-        'bg-background/80 flex flex-col items-center justify-center gap-4 backdrop-blur-sm',
-        fullScreen ? 'fixed inset-0 z-50' : 'absolute inset-0',
-        className
-      )}
-    >
+    <div className={loadingOverlayStyles({ type, className })}>
       <Spinner size="lg" />
-      {text && <p className="text-muted-foreground text-sm">{text}</p>}
+      {text && (
+        <p className="text-muted-foreground text-sm font-medium animate-pulse">
+          {text}
+        </p>
+      )}
     </div>
   );
 }

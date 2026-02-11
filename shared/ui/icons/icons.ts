@@ -15,6 +15,8 @@ import {
   Search,
   Trash2,
   Pencil,
+  Plus,
+  Minus,
 } from "lucide-react";
 
 export const Icons = {
@@ -39,6 +41,8 @@ export const Icons = {
   search: Search,
   trash: Trash2,
   pencil: Pencil,
+  plus: Plus,
+  minus: Minus,
 } as const;
 
 export type IconName = keyof typeof Icons;

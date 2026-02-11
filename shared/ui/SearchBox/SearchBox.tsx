@@ -26,7 +26,12 @@ export function SearchBox({
       {/* 버튼이 없을 때 */}
       {!hasButton && <Search className={icon()} size={18} />}
 
-      <input type="text" className={input()} {...props} />
+      <input
+        type="text"
+        className={`${input()} min-w-10`}
+        aria-label={props.placeholder || "검색어 입력"}
+        {...props}
+      />
 
       {/* 버튼이 있을 때 */}
       {hasButton && (

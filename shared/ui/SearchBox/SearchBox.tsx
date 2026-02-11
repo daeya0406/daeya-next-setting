@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Icon } from "@/shared/ui/Icons";
 import { searchBoxStyles } from "./SearchBox.styles";
 
 interface SearchBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -24,7 +24,7 @@ export function SearchBox({
   return (
     <form onSubmit={handleFormSubmit} className={base({ className })}>
       {/* 버튼이 없을 때 */}
-      {!hasButton && <Search className={icon()} size={18} />}
+      {!hasButton && <Icon name="search" className={icon()} size={18} />}
 
       <input
         type="text"
@@ -36,7 +36,7 @@ export function SearchBox({
       {/* 버튼이 있을 때 */}
       {hasButton && (
         <button type="submit" className={button()}>
-          <Search size={16} strokeWidth={2.5} />
+          <Icon name="search" size={16} />
           {buttonText}
         </button>
       )}

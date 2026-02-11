@@ -22,7 +22,7 @@ export function ModalProvider() {
         if (!Scene) return null;
 
         return (
-          // Radix의 Root에 직접 open과 onOpenChange를 박아야 합니다.
+          // Radix의 Root에 직접 open과 onOpenChange를 박아야 함
           <Modal
             key={`${item.type}-${index}`}
             open={true}

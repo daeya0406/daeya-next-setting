@@ -21,6 +21,20 @@
   --radius-sm: calc(var(--radius) - 4px); /* 체크박스 */
   --radius-md: calc(var(--radius) - 2px); /* 버튼, 인풋 */
   --radius-lg: var(--radius);
+
+  /* 드롭다운 애니메이션 */
+  --animate-dropdown-in: dropdown-in 0.2s ease-out;
+
+  @keyframes dropdown-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
 }
 
 :root {
@@ -61,8 +75,12 @@
   }
 
   /* 크롬, 사파리, 엣지의 자동완성 배경색 설정 */
-  input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px var(--background) inset !important;
-    -webkit-text-fill-color: var(--foreground) !important;
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #111827 !important; /* 강제로 진한 색 고정 */
+    transition: background-color 5000s ease-in-out 0s; /* 배경색 변화를 영원히 지연 */
   }
 }

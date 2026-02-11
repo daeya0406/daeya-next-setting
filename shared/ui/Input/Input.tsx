@@ -19,12 +19,13 @@ export function Input({
   status,
   className,
   id,
+  autoComplete = "off",
   ...props
 }: InputProps) {
   const generatedId = useId();
   const inputId = id || generatedId;
 
-  // 에러가 있으면 강제로 error 상태를 보여줍니다.
+  // 에러가 있으면 강제로 error 상태를 보여줌
   const currentStatus = error ? "error" : status;
 
   const {
@@ -53,7 +54,12 @@ export function Input({
           </div>
         )}
 
-        <input id={inputId} className={input()} {...props} />
+        <input
+          id={inputId}
+          className={input()}
+          autoComplete={autoComplete}
+          {...props}
+        />
 
         {rightSection && (
           <div className="pr-3 flex items-center justify-center text-gray-400">

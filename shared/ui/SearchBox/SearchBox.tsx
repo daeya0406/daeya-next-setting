@@ -1,40 +1,40 @@
-import { Icons } from "@/shared/ui/Icons";
-import type { ChangeEvent, FormEvent } from "react";
+import { Search } from "lucide-react";
 import { searchBoxStyles } from "./SearchBox.styles";
 
-interface SearchBoxProps {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  id?: string;
-  placeholder?: string;
-  className?: string;
+interface SearchBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  onSubmit?: (e: React.FormEvent) => void;
+  hasButton?: boolean;
+  buttonText?: string;
 }
 
 export function SearchBox({
-  value,
-  onChange,
   onSubmit,
-  id = "search",
-  placeholder = "검색...",
+  hasButton = false,
+  buttonText = "",
   className,
+  ...props
 }: SearchBoxProps) {
-  const { base, input, icon } = searchBoxStyles();
+  const { base, input, icon, button } = searchBoxStyles({ hasButton });
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit?.(e);
+  };
 
   return (
-    <form onSubmit={onSubmit} role="search" className={base({ className })}>
-      <label htmlFor={id} className="sr-only">
-        검색
-      </label>
-      <Icons.search className={icon()} size={18} aria-hidden="true" />
-      <input
-        id={id}
-        type="search"
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={input()}
-      />
+    <form onSubmit={handleFormSubmit} className={base({ className })}>
+      {/* 버튼이 없을 때 */}
+      {!hasButton && <Search className={icon()} size={18} />}
+
+      <input type="text" className={input()} {...props} />
+
+      {/* 버튼이 있을 때 */}
+      {hasButton && (
+        <button type="submit" className={button()}>
+          <Search size={16} strokeWidth={2.5} />
+          {buttonText}
+        </button>
+      )}
     </form>
   );
 }

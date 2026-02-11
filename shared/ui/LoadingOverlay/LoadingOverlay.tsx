@@ -2,7 +2,7 @@ import { Spinner } from "@/shared/ui/Spinner";
 import { loadingOverlayStyles } from "./LoadingOverlay.styles";
 import type { VariantProps } from "tailwind-variants";
 
-// 💡 중요: tv에서 정의한 타입들을 자동으로 추출해서 props 타입으로 씁니다.
+// tv에서 정의한 타입들을 자동으로 추출해서 props 타입으로 사용
 type LoadingOverlayVariants = VariantProps<typeof loadingOverlayStyles>;
 
 interface LoadingOverlayProps extends LoadingOverlayVariants {
@@ -13,7 +13,7 @@ interface LoadingOverlayProps extends LoadingOverlayVariants {
 export function LoadingOverlay({
   className,
   text = "로딩 중...",
-  type, // tv의 variants에서 정의한 값 (absolute | fixed)
+  type, // absolute | fixed
 }: LoadingOverlayProps) {
   return (
     <div className={loadingOverlayStyles({ type, className })}>

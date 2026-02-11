@@ -1,9 +1,7 @@
-/**
- * API 공통 규격
- */
+// API 공통 규격
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-/** 서버 응답 기본 포맷 */
+// 서버 응답 기본 포맷
 export interface ApiResponse<T = unknown> {
   data: T;
   status: number;
@@ -11,7 +9,7 @@ export interface ApiResponse<T = unknown> {
   success: boolean;
 }
 
-/** ApiClient 요청 설정 */
+// ApiClient 요청 설정
 export interface RequestConfig {
   method?: HttpMethod;
   headers?: Record<string, string>;
@@ -21,7 +19,7 @@ export interface RequestConfig {
   signal?: AbortSignal;
 }
 
-/** ApiClient 초기화 옵션 */
+//  ApiClient 초기화 옵션
 export interface ApiClientOptions {
   baseURL: string;
   timeout?: number;
@@ -39,9 +37,7 @@ export type ResponseInterceptor = <T = unknown>(
   response: ApiResponse<T>,
 ) => ApiResponse<T> | Promise<ApiResponse<T>>;
 
-/**
- * React Query 관련 타입
- */
+// React Query 관련 타입
 export interface QueryOptions {
   enabled?: boolean;
   staleTime?: number;
@@ -57,9 +53,7 @@ export interface MutationOptions {
   onSettled?: () => void;
 }
 
-/**
- * 목록 조회(Filter, Sort, Pagination) 파라미터
- */
+// 목록 조회(Filter, Sort, Pagination) 파라미터
 export interface FilterParams {
   search?: string;
   status?: string;
@@ -81,9 +75,7 @@ export interface PaginationParams {
 /** 통합 목록 쿼리 파라미터 */
 export type ListQueryParams = FilterParams & SortParams & PaginationParams;
 
-/**
- * API 엔드포인트 관리
- */
+// API 엔드포인트 관리
 export const API_ENDPOINTS = {
   auth: {
     login: "/auth/login",

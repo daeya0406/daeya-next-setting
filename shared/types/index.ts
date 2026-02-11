@@ -1,9 +1,4 @@
-/**
- * Central export point for all types
- * 모든 타입의 중앙 export 지점
- */
-
-// Common types
+// 공통 types
 export type {
   ApiResponse,
   ApiError,
@@ -31,7 +26,7 @@ export type {
   PropsWithClassName,
   PropsWithChildren,
   PropsWithChildrenAndClassName,
-} from './common';
+} from "./common";
 
 // API types
 export type {
@@ -46,11 +41,9 @@ export type {
   SortParams,
   PaginationParams,
   ListQueryParams,
-  ApiEndpoint,
-  ApiEndpoints,
-} from './api';
+} from "./api";
 
-export { API_ENDPOINTS } from './api';
+export { API_ENDPOINTS } from "./api";
 
 // User types
 export type {
@@ -64,4 +57,4 @@ export type {
   AuthResponse,
   PasswordResetRequest,
   PasswordResetConfirm,
-} from './user';
+} from "./user";

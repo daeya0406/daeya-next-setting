@@ -61,15 +61,23 @@ pnpm dev
 
 ## 📦 프로젝트 최적화 (선택 삭제)
 
-모든 프로젝트가 모든 라이브러리를 필요로 하지는 않습니다. 이번 프로젝트의 성격에 따라 아래 명령어를 사용하여 프로젝트를 가볍게 만드세요.
+이 프로젝트는 UI 컴포넌트와 외부 라이브러리가 밀접하게 연결되어 있습니다. 특정 기능을 사용하지 않아 패키지를 삭제할 경우, 해당 패키지를 참조하는 `shared/ui` 내의 컴포넌트 파일도 함께 삭제해야 빌드 에러를 방지할 수 있습니다.
 
-### 1. Radix UI (Headless UI)를 쓰지 않을 때
+### 1. Radix UI (Headless UI) 미사용 시
 
-커스텀 컴포넌트 위주로 구성하거나 직접 구현한다면 삭제하세요.
+특정 UI 컴포넌트를 사용하지 않기로 했다면, 아래 흐름에 따라 의존성을 정리하세요.
 
-```bash
-pnpm remove @radix-ui/react-checkbox @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-radio-group @radix-ui/react-select @radix-ui/react-slot @radix-ui/react-tabs
-```
+**[정리 프로세스 예시: Checkbox]**
+
+1. **의존성 확인**: `src/shared/ui/Checkbox/index.tsx` 상단에 `from "@radix-ui/..."`가 있는지 확인합니다.
+2. **패키지 삭제**:
+   ```bash
+   pnpm remove @radix-ui/react-checkbox
+   ```
+3. **파일 삭제**:
+   ```bash
+   rm -rf src/shared/ui/Checkbox
+   ```
 
 ### 2. 폼(Form) 처리가 거의 없을 때
 

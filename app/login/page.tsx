@@ -103,7 +103,7 @@ export default function LoginPage() {
         <Card.Footer className="justify-center gap-2 border-t border-gray-50 pt-4">
           계정이 없으신가요?
           <Link
-            href="/register"
+            href="/signup"
             className="font-semibold text-primary hover:underline"
           >
             회원가입 하기

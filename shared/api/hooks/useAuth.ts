@@ -60,6 +60,23 @@ export function useRegister() {
 }
 
 /**
+ * Refresh token mutation
+ */
+export function useRefreshToken() {
+  return useMutation<AuthResponse, Error, { refreshToken: string }>(
+    (data) => apiClient.post<AuthResponse>('/auth/refresh', data),
+    {
+      onSuccess: (data) => {
+        if (data.accessToken) {
+          apiClient.setAuthToken(data.accessToken);
+          localStorage.setItem('accessToken', data.accessToken);
+        }
+      },
+    }
+  );
+}
+
+/**
  * Logout mutation
  */
 export function useLogout() {
@@ -68,6 +85,7 @@ export function useLogout() {
       // Clear token
       apiClient.clearAuthToken();
       localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
     },
   });
 }

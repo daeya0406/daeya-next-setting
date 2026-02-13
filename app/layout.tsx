@@ -3,6 +3,7 @@ import './globals.css';
 import { ModalProvider } from '@/shared/ui/Modal';
 import { ReactQueryProvider } from '@/lib/react-query';
 import { ToastProvider } from '@/shared/ui/Toast';
+import { Navbar } from '@/shared/ui/Navbar';
 
 export default function RootLayout({
   children,
@@ -13,7 +14,8 @@ export default function RootLayout({
     <html lang="ko" className={pretendard.variable}>
       <body className="font-sans">
         <ReactQueryProvider>
-          {children}
+          <Navbar />
+          <main>{children}</main>
           <ModalProvider />
           <ToastProvider />
         </ReactQueryProvider>

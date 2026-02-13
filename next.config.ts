@@ -34,6 +34,9 @@ const nextConfig: NextConfig = {
   // Turbopack configuration (replaces webpack in Next.js 16+)
   turbopack: {},
 
+  // Remove webpack configuration for Next.js 16+
+  // Next.js 16 uses Turbopack by default
+
   // Headers for security and caching
   async headers() {
     return [

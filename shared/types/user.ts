@@ -36,16 +36,14 @@ export interface UserPreferences {
 }
 
 export interface LoginCredentials {
-  email: string;
+  username: string;
   password: string;
-  rememberMe?: boolean;
 }
 
 export interface RegisterData {
-  email: string;
+  username: string;
   password: string;
   name: string;
-  agreeToTerms: boolean;
 }
 
 export interface AuthResponse {

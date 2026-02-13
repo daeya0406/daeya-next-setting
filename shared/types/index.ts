@@ -65,3 +65,14 @@ export type {
   PasswordResetRequest,
   PasswordResetConfirm,
 } from './user';
+
+// Board types
+export type {
+  BoardCategory,
+  BoardCategoryMap,
+  Board,
+  BoardListItem,
+  BoardListResponse,
+  CreateBoardInput,
+  UpdateBoardInput,
+} from './board';

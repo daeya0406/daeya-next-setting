@@ -32,12 +32,10 @@ export default function LoginPage() {
 
   const onSubmit = (data: LoginForm) => {
     login(data, {
-      onSuccess: (response) => {
+      onSuccess: () => {
+        // ✅ [수정] 저장은 이미 useLogin 훅 내부에서 처리하므로,
+        // 여기서는 성공 메시지와 페이지 이동만 관리합니다.
         toast.success('로그인되었습니다');
-        // Store refresh token
-        if (response.refreshToken) {
-          localStorage.setItem('refreshToken', response.refreshToken);
-        }
         router.push('/boards');
       },
       onError: (error) => {

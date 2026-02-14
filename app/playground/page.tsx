@@ -9,7 +9,7 @@ import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
 import { SearchBox } from "@/shared/ui/SearchBox";
 import { Tabs } from "@/shared/ui/Tabs";
-import { Table, THeader, TRow, TCell } from "@/shared/ui/Table";
+import { Table, THeader, TBody, TRow, TCell } from "@/shared/ui/Table";
 import { Pagination } from "@/shared/ui/Pagination";
 import { Title } from "@/shared/ui/Title";
 import { Checkbox } from "@/shared/ui/Checkbox";
@@ -224,13 +224,18 @@ export default function UIPlayground() {
                             <TCell isHeader>분류</TCell>
                           </TRow>
                         </THeader>
-                        <tbody>
+                        <TBody>
                           <TRow>
                             <TCell>이름 1</TCell>
                             <TCell>분류 1</TCell>
                           </TRow>
-                        </tbody>
+                        </TBody>
                       </Table>
+                      <Pagination
+                        totalCount={120}
+                        currentPage={currentPage}
+                        onPageChange={setCurrentPage}
+                      />
                     </div>
                   ),
                 },
@@ -247,11 +252,6 @@ export default function UIPlayground() {
                   ),
                 },
               ]}
-            />
-            <Pagination
-              totalCount={120}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
             />
           </div>
         </Card>

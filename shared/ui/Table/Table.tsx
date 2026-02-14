@@ -15,10 +15,14 @@ export function Table({ children, className }: TableProps) {
   );
 }
 
-// 간단한 사용을 위한 서브 컴포넌트들
 export const THeader = ({ children }: { children: ReactNode }) => {
   const { thead } = tableStyles();
   return <thead className={thead()}>{children}</thead>;
+};
+
+export const TBody = ({ children }: { children: ReactNode }) => {
+  const { tbody } = tableStyles();
+  return <tbody className={tbody()}>{children}</tbody>;
 };
 
 export const TRow = ({ children }: { children: ReactNode }) => {

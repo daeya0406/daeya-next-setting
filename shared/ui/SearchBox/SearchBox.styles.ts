@@ -7,7 +7,7 @@ export const searchBoxStyles = tv({
       "flex-1 h-full bg-transparent outline-none text-sm text-gray-900 placeholder:text-gray-400",
     icon: "text-gray-400 group-focus-within:text-primary shrink-0",
     button:
-      "min-w-12 h-full px-3 bg-primary text-white rounded-r-md shrink-0 font-medium text-sm flex justify-center items-center gap-1.5",
+      "cursor-pointer min-w-12 h-full px-3 bg-primary text-white rounded-r-md shrink-0 font-medium text-sm flex justify-center items-center gap-1.5",
   },
   variants: {
     hasButton: {

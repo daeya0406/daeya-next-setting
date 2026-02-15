@@ -6,6 +6,7 @@ import {
   Eye,
   EyeOff,
   User,
+  Mail,
   Settings,
   ChevronLeft,
   ChevronRight,
@@ -28,6 +29,7 @@ export const Icons = {
   eye: Eye,
   eyeOff: EyeOff,
   user: User,
+  mail: Mail,
   settings: Settings,
 
   // 네비게이션

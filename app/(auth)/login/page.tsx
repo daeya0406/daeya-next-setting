@@ -9,9 +9,12 @@ import { Icon } from "@/shared/ui/Icons";
 import Link from "next/link";
 import { useState } from "react";
 import { Card } from "@/shared/ui/Card/Card";
+import { useRouter } from "next/navigation"; // 1. 리다이렉트용
+import { apiRequest } from "@/shared/api/auth"; // 2. 아까 만든 만능 래퍼
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter(); // 라우터 초기화
 
   const {
     register,
@@ -26,11 +29,26 @@ export default function LoginPage() {
     },
   });
 
+  // ✅ 핵심: 진짜 로그인 로직
   const onSubmit = async (data: LoginInput) => {
-    // 백엔드 로그인 API 호출 로직 필요
-    console.log("Login Data:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    alert("로그인 성공!");
+    try {
+      // 래퍼를 호출하면서 '메서드'와 '바디'를 넘깁니다.
+      const response = await apiRequest("/auth/signin", {
+        method: "POST",
+        body: JSON.stringify({
+          username: data.email,
+          password: data.password,
+        }),
+      });
+
+      // 🎁 서버가 준 토큰을 쿠키에 쏙!
+      document.cookie = `accessToken=${response.accessToken}; path=/; max-age=3600;`;
+
+      alert("로그인 성공!");
+      router.push("/"); // 메인으로 런!
+    } catch (err: any) {
+      alert(err.message);
+    }
   };
 
   return (
@@ -38,7 +56,7 @@ export default function LoginPage() {
       <Card size="lg" className="w-full max-w-md">
         <Card.Header className="text-center space-y-2">
           <h1 className="text-3xl font-extrabold tracking-tight">로그인</h1>
-          <p className="text-gray-500">로그인 하면 다양한 이용이 가능합니다.</p>
+          <p className="text-gray-500">로그물 하면 다양한 이용이 가능합니다.</p>
         </Card.Header>
 
         <Card.Content>
@@ -46,7 +64,7 @@ export default function LoginPage() {
             <Input
               label="이메일 주소"
               placeholder="name@company.com"
-              leftSection={<Icon name="user" size={18} />}
+              leftSection={<Icon name="mail" size={18} />}
               error={errors.email?.message}
               {...register("email")}
             />
@@ -92,7 +110,7 @@ export default function LoginPage() {
               type="submit"
               size="full"
               radius="lg"
-              isLoading={isSubmitting}
+              isLoading={isSubmitting} // 6. react-hook-form의 로딩 상태 연결
               className="h-12 text-lg shadow-lg shadow-primary/20"
             >
               로그인

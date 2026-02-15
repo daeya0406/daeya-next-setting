@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
-import type { PropsWithChildren, PropsWithClassName } from "@/shared/types";
 import { Button } from "@/shared/ui/Button";
 
-interface EmptyStateProps extends PropsWithClassName, PropsWithChildren {
+interface EmptyStateProps {
+  className?: string;
+  children?: React.ReactNode;
   title: string;
   description?: string;
   icon?: React.ReactNode;
@@ -23,7 +24,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-4 py-12 text-center",
+        "flex flex-col items-center justify-center gap-4 py-12 text-center bg-gray-200/25 rounded-xl",
         className,
       )}
     >

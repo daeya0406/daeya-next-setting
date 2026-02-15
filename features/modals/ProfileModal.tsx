@@ -2,6 +2,7 @@ import { Modal } from "@/shared/ui/Modal";
 import { Button } from "@/shared/ui/Button";
 import { useModalStore } from "@/shared/store/useModalStore";
 import { Section } from "@/shared/ui/Section";
+import { Input } from "@/shared/ui/Input";
 
 export function ProfileModal({
   name,
@@ -36,7 +37,7 @@ export function ProfileModal({
         <p>
           <strong>{name}</strong>님의 정보를 수정 중입니다.
         </p>
-        <input
+        <Input
           className="border p-2 w-full mt-4 rounded-md"
           placeholder="이름 변경"
         />

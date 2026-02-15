@@ -1,15 +1,14 @@
-import { forwardRef } from 'react';
-import { textareaStyles } from './Textarea.styles';
-import type { PropsWithClassName } from '@/shared/types';
+import { forwardRef } from "react";
+import { textareaStyles } from "./Textarea.styles";
 
-export interface TextareaProps
-  extends
-    PropsWithClassName,
-    Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
+export interface TextareaProps extends Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "size"
+> {
   label?: string;
   error?: string;
-  size?: 'sm' | 'md' | 'lg';
-  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
+  size?: "sm" | "md" | "lg";
+  resize?: "none" | "vertical" | "horizontal" | "both";
   showCounter?: boolean;
 }
 
@@ -19,14 +18,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       label,
       error,
-      size = 'md',
-      resize = 'vertical',
+      size = "md",
+      resize = "vertical",
       showCounter = false,
       maxLength,
       value,
       ...props
     },
-    ref
+    ref,
   ) => {
     const styles = textareaStyles({
       size,
@@ -56,7 +55,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {error && <span className={styles.error()}>{error}</span>}
       </div>
     );
-  }
+  },
 );
 
-Textarea.displayName = 'Textarea';
+Textarea.displayName = "Textarea";

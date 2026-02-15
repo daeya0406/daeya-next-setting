@@ -1,18 +1,15 @@
 import { forwardRef } from "react";
 import { toggleStyles } from "./Toggle.styles";
-import type { PropsWithClassName } from "@/shared/types";
 
-export interface ToggleProps
-  extends
-    PropsWithClassName,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
+export interface ToggleProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "onChange"
+> {
   label?: string;
   description?: string;
   error?: string;
   size?: "sm" | "md" | "lg";
-  // 불리언 값만 바로 넘겨주는 핸들러 추가
   onCheckedChange?: (checked: boolean) => void;
-  // 표준 onChange도 대응 가능하도록 선택적 추가
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -32,13 +29,9 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
   ) => {
     const styles = toggleStyles({ size, error: !!error });
 
-    // 내부 핸들러에서 input에 필요한 표준 로직 수행
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const isChecked = e.target.checked;
-
-      // 1. 표준 onChange 호출
       onChange?.(e);
-      // 2. 편리한 onCheckedChange 호출
       onCheckedChange?.(isChecked);
     };
 
@@ -55,8 +48,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
               onChange={handleChange}
               className="sr-only peer"
             />
-            {/* 시각적 트랙 (토글 배경) */}
-            <div className={`${styles.track()}`} />
+            <div className={styles.track()} />
           </div>
 
           {(label || description) && (

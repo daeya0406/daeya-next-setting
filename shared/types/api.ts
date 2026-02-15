@@ -1,7 +1,6 @@
 // API 공통 규격
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-// 서버 응답 기본 포맷
 export interface ApiResponse<T = unknown> {
   data: T;
   status: number;
@@ -9,88 +8,63 @@ export interface ApiResponse<T = unknown> {
   success: boolean;
 }
 
-// ApiClient 요청 설정
-export interface RequestConfig {
+export interface RequestConfig extends Omit<RequestInit, "method" | "body"> {
   method?: HttpMethod;
-  headers?: Record<string, string>;
-  params?: Record<string, string | number | boolean>; // 쿼리 스트링
+  // string, number, boolean 모두 허용하고 undefined도 넘길 수 있게 설정
+  params?: Record<string, string | number | boolean | undefined>;
   body?: unknown;
-  timeout?: number;
-  signal?: AbortSignal;
-}
-
-//  ApiClient 초기화 옵션
-export interface ApiClientOptions {
-  baseURL: string;
-  timeout?: number;
   headers?: Record<string, string>;
-  interceptors?: {
-    request?: RequestInterceptor[];
-    response?: ResponseInterceptor[];
-  };
 }
 
-export type RequestInterceptor = (
-  config: RequestConfig,
-) => RequestConfig | Promise<RequestConfig>;
-export type ResponseInterceptor = <T = unknown>(
-  response: ApiResponse<T>,
-) => ApiResponse<T> | Promise<ApiResponse<T>>;
-
-// React Query 관련 타입
-export interface QueryOptions {
-  enabled?: boolean;
-  staleTime?: number;
-  cacheTime?: number;
-  refetchOnWindowFocus?: boolean;
-  refetchOnReconnect?: boolean;
-  retry?: boolean | number;
+// --- Auth 관련 ---
+export interface SignupRequest {
+  username: string;
+  name: string;
+  password: string;
+  confirmPassword: string;
 }
 
-export interface MutationOptions {
-  onSuccess?: (data: unknown) => void;
-  onError?: (error: unknown) => void;
-  onSettled?: () => void;
+export interface LoginRequest {
+  username: string;
+  password: string;
 }
 
-// 목록 조회(Filter, Sort, Pagination) 파라미터
-export interface FilterParams {
-  search?: string;
-  status?: string;
-  dateFrom?: string;
-  dateTo?: string;
-  [key: string]: string | number | boolean | undefined;
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
 }
 
-export interface SortParams {
-  sortBy?: string;
-  sortOrder?: "asc" | "desc";
+// --- Board 관련 ---
+export interface Post {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  category: string;
+  createdAt: string;
 }
 
-export interface PaginationParams {
+export interface ListQueryParams {
   page?: number;
   limit?: number;
+  search?: string;
+  category?: string;
+  [key: string]: string | number | boolean | undefined;
 }
-
-/** 통합 목록 쿼리 파라미터 */
-export type ListQueryParams = FilterParams & SortParams & PaginationParams;
 
 // API 엔드포인트 관리
 export const API_ENDPOINTS = {
   auth: {
-    login: "/auth/login",
-    logout: "/auth/logout",
+    signup: "/auth/signup",
+    login: "/auth/signin",
     refresh: "/auth/refresh",
-    profile: "/auth/profile",
   },
-  users: {
-    list: "/users",
-    detail: (id: string | number) => `/users/${id}`,
-    create: "/users",
-    update: (id: string | number) => `/users/${id}`,
-    delete: (id: string | number) => `/users/${id}`,
-  },
-  pokemon: {
-    detail: (name: string) => `pokemon/${name}`,
+  board: {
+    list: "/posts",
+    detail: (id: string | number) => `/posts/${id}`,
+    create: "/posts",
+    update: (id: string | number) => `/posts/${id}`,
+    delete: (id: string | number) => `/posts/${id}`,
+    categories: "/posts/categories",
   },
 } as const;

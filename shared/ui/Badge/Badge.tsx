@@ -1,9 +1,10 @@
-import { badgeStyles } from './Badge.styles';
-import type { PropsWithChildren, PropsWithClassName } from '@/shared/types';
+import { badgeStyles } from "./Badge.styles";
 
-export interface BadgeProps extends PropsWithClassName, PropsWithChildren {
-  variant?: 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info';
-  size?: 'sm' | 'md' | 'lg';
+export interface BadgeProps {
+  children?: React.ReactNode;
+  className?: string;
+  variant?: "default" | "primary" | "success" | "warning" | "error" | "info";
+  size?: "sm" | "md" | "lg";
   outline?: boolean;
   icon?: React.ReactNode;
 }
@@ -11,14 +12,14 @@ export interface BadgeProps extends PropsWithClassName, PropsWithChildren {
 export const Badge = ({
   children,
   className,
-  variant = 'default',
-  size = 'md',
+  variant = "default",
+  size = "md",
   outline = false,
   icon,
 }: BadgeProps) => {
   return (
     <span className={badgeStyles({ variant, size, outline, className })}>
-      {icon && <span className="inline-flex">{icon}</span>}
+      {icon && <span className="inline-flex mr-1">{icon}</span>}
       {children}
     </span>
   );

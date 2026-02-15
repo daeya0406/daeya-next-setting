@@ -43,42 +43,40 @@ export default function UIPlayground() {
         <div className="space-y-6">
           <Title.Section color="blue">Form Elements</Title.Section>
           <Card size="md" className="space-y-8">
-            <div className="grid grid-cols-2 gap-6">
-              {/* Checkbox & Radio */}
-              <div className="space-y-4">
-                <Title.Label>Selection</Title.Label>
+            {/* Checkbox & Radio */}
+            <div className="space-y-4">
+              <Title.Label>Selection</Title.Label>
+              <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-3">
-                    <Checkbox id="c1" label="필수 약관 동의" required />
-                    <Checkbox id="c2" label="마케팅 정보 수신 (선택)" />
+                  <Checkbox id="c1" label="필수 약관 동의" required />
+                  <Checkbox id="c2" label="마케팅 정보 수신 (선택)" />
+                </div>
+                <RadioGroup
+                  defaultValue="A"
+                  onValueChange={(value) => console.log(value)}
+                  className="flex gap-6"
+                >
+                  <div className="flex items-center">
+                    <RadioItem value="A" id="r1" label="옵션 A (기본)" />
                   </div>
-                  <RadioGroup
-                    defaultValue="A"
-                    onValueChange={(value) => console.log(value)}
-                    className="flex gap-6"
-                  >
-                    <div className="flex items-center">
-                      <RadioItem value="A" id="r1" label="옵션 A (기본)" />
-                    </div>
-                    <div className="flex items-center">
-                      <RadioItem value="B" id="r2" label="옵션 B" />
-                    </div>
-                    <div className="flex items-center">
-                      <RadioItem value="C" id="r3" label="옵션 C" />
-                    </div>
-                  </RadioGroup>
-                </div>
+                  <div className="flex items-center">
+                    <RadioItem value="B" id="r2" label="옵션 B" />
+                  </div>
+                  <div className="flex items-center">
+                    <RadioItem value="C" id="r3" label="옵션 C" />
+                  </div>
+                </RadioGroup>
               </div>
+            </div>
 
-              {/* Toggle */}
-              <div className="space-y-4">
-                <Title.Label>Switch</Title.Label>
-                <div className="flex items-center gap-3">
-                  <Toggle checked={isToggled} onCheckedChange={setIsToggled} />
-                  <span className="text-sm text-gray-500">
-                    {isToggled ? "On" : "Off"}
-                  </span>
-                </div>
+            {/* Toggle */}
+            <div className="space-y-4">
+              <Title.Label>Switch</Title.Label>
+              <div className="flex items-center gap-3">
+                <Toggle checked={isToggled} onCheckedChange={setIsToggled} />
+                <span className="text-sm text-gray-500">
+                  {isToggled ? "On" : "Off"}
+                </span>
               </div>
             </div>
 
@@ -88,47 +86,49 @@ export default function UIPlayground() {
               <Textarea placeholder="내용을 입력해 주세요..." rows={4} />
             </div>
 
-            <Title.Label>Toasts</Title.Label>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                size="sm"
-                className="bg-green-700"
-                onClick={() => toast.success("성공적으로 저장되었습니다!")}
-              >
-                Success Toast
-              </Button>
+            <div className="space-y-3">
+              <Title.Label>Toasts</Title.Label>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  className="bg-green-700"
+                  onClick={() => toast.success("성공적으로 저장되었습니다!")}
+                >
+                  Success Toast
+                </Button>
 
-              <Button
-                size="sm"
-                className="bg-red-700"
-                onClick={() =>
-                  toast.error("데이터를 불러오지 못했습니다.", {
-                    description: "네트워크 연결 상태를 확인해주세요.",
-                  })
-                }
-              >
-                Error Toast
-              </Button>
+                <Button
+                  size="sm"
+                  className="bg-red-700"
+                  onClick={() =>
+                    toast.error("데이터를 불러오지 못했습니다.", {
+                      description: "네트워크 연결 상태를 확인해주세요.",
+                    })
+                  }
+                >
+                  Error Toast
+                </Button>
 
-              <Button
-                size="sm"
-                className="bg-yellow-600"
-                onClick={() =>
-                  toast.warning("주의가 필요합니다.", {
-                    description: "이 작업은 되돌릴 수 없습니다.",
-                  })
-                }
-              >
-                Warning Toast
-              </Button>
+                <Button
+                  size="sm"
+                  className="bg-yellow-600"
+                  onClick={() =>
+                    toast.warning("주의가 필요합니다.", {
+                      description: "이 작업은 되돌릴 수 없습니다.",
+                    })
+                  }
+                >
+                  Warning Toast
+                </Button>
 
-              <Button
-                size="sm"
-                className="bg-blue-500"
-                onClick={() => toast.info("새로운 공지사항이 있습니다.")}
-              >
-                Info Toast
-              </Button>
+                <Button
+                  size="sm"
+                  className="bg-blue-500"
+                  onClick={() => toast.info("새로운 공지사항이 있습니다.")}
+                >
+                  Info Toast
+                </Button>
+              </div>
             </div>
           </Card>
         </div>

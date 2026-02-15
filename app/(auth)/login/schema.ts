@@ -9,7 +9,7 @@ export const loginSchema = z.object({
     .string()
     .min(1, { message: "비밀번호를 입력해주세요." })
     .min(8, { message: "비밀번호는 최소 8자 이상이어야 합니다." }),
-  rememberMe: z.boolean().optional(), // 자동 로그인 체크박스용
+  rememberMe: z.boolean().optional(),
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;

@@ -1,12 +1,14 @@
-# 이름 짓기
-name: Github Actions
-# 언제 이 작업을 실행할지 정의
-# push: github에 push할 때마다 실행
+name: Github Actions로 테스트 자동화
 on: push
 
 jobs:
-  push-job:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: 첫 번째 작업
-        run: echo "첫 번째 작업 실행 중"
+      - name: Github Repository 파일 불러오기
+        uses: actions/checkout@v5
+
+      - name: Node.js 설치하기
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"

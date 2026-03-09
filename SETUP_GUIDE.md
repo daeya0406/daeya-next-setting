@@ -74,10 +74,6 @@ pnpm dev
    ```bash
    pnpm remove @radix-ui/react-checkbox
    ```
-3. **파일 삭제**:
-   ```bash
-   rm -rf src/shared/ui/Checkbox
-   ```
 
 ### 2. 폼(Form) 처리가 거의 없을 때
 
@@ -94,6 +90,24 @@ pnpm remove react-hook-form zod @hookform/resolvers
 ```bash
 pnpm remove @tanstack/react-query @tanstack/react-query-devtools
 ```
+
+### 4. 테스트 파일을 삭제할 때
+
+1. **파일 삭제**:
+   ```bash
+   rm -rf src/shared/ui/Checkbox
+   ```
+2. **테스트 의존성 삭제**:
+
+   ```bash
+   # 패키지 삭제
+   pnpm remove jest jest-environment-jsdom @types/jest @testing-library/react @testing-library/jest-dom msw
+   ```
+
+   ```bash
+   # 설정 파일 및 폴더 삭제
+   rm -rf __tests__ src/mocks jest.config.js jest.setup.ts .github/workflows/actions.yml
+   ```
 
 ---
 

@@ -1,14 +1,34 @@
-name: Github Actions로 테스트 자동화
-on: push
+# .github/workflows/actions.yml
+
+name: Github Actions로 테스트 자동화하기
+on:
+  pull_request:
+    # 적용 브랜치
+    branches:
+      - main
+    # PR 생성 했을 때만
+    types: [opened]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Github Repository 파일 불러오기
+      - name: Github Repository 불러오기
         uses: actions/checkout@v5
 
-      - name: Node.js 설치하기
+      - name: pnpm 설치
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Node.js 설치
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: 의존성(라이브러리) 설치
+        run: pnpm install --frozen-lockfile
+
+      - name: 테스트 실행하기
+        run: pnpm test

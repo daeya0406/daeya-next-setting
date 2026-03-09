@@ -9,6 +9,7 @@ import { Icon } from "@/shared/ui/Icons";
 import Link from "next/link";
 import { useState } from "react";
 import { Card } from "@/shared/ui/Card/Card";
+import { toast } from "@/shared/ui/Toast";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +28,18 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (data: LoginInput) => {
+    const res = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      toast.error("로그인에 실패하였습니다.");
+    }
+
+    const result = await res.json();
+    toast.success(`${result.name}님으로 로그인 성공`);
+
     // 백엔드 로그인 API 호출 로직 필요
     console.log("Login Data:", data);
     await new Promise((resolve) => setTimeout(resolve, 1500));

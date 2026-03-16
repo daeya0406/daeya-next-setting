@@ -39,6 +39,12 @@
 - ✅ **Lucide React** - 일관된 아이콘 시스템
 - ✅ **Husky & lint-staged** - 커밋 전 코드 품질 검증 (ESLint/Prettier)
 
+### 5. API 레이어 & 상태 관리
+
+- ✅ **TanStack Query (v5)** - 서버 상태 관리 및 캐싱
+- ✅ **MSW (Mock Service Worker)** - 네트워크 수준의 API 모킹 (개발/테스트 공용)
+- ✅ `shared/api/client.ts` - 타입 안전한 Axios/Fetch 래퍼
+
 ---
 
 ## 🚀 시작하기
@@ -91,22 +97,29 @@ pnpm remove react-hook-form zod @hookform/resolvers
 pnpm remove @tanstack/react-query @tanstack/react-query-devtools
 ```
 
-### 4. 테스트 파일을 삭제할 때
+### 4. 테스트 및 API 모킹이 필요 없을 때
 
-1. **파일 삭제**:
+프로젝트가 단순하거나 실제 API가 이미 완성되어 모킹이 필요 없다면 아래 과정을 따르세요.
+
+1. **폴더 및 파일 삭제**:
+
    ```bash
-   rm -rf src/shared/ui/Checkbox
+   # 테스트 코드 및 MSW 설정 삭제
+   src/mocks
+   src/app/(auth)/login/login.test.tsx
+   vitest.config.ts
    ```
-2. **테스트 의존성 삭제**:
+
+2. **RootLayout 수정**:
 
    ```bash
-   # 패키지 삭제
-   pnpm remove jest jest-environment-jsdom @types/jest @testing-library/react @testing-library/jest-dom msw
+   src/app/layout.tsx에서 <MSWInitializer> 컴포넌트와 관련 import를 제거하세요.
    ```
 
+3. **패키지 삭제**:
+
    ```bash
-   # 설정 파일 및 폴더 삭제
-   rm -rf __tests__ src/mocks jest.config.js jest.setup.ts .github/workflows/actions.yml
+   pnpm remove vitest @vitejs/plugin-react @testing-library/react @testing-library/dom @testing-library/jest-dom jsdom msw
    ```
 
 ---
@@ -152,6 +165,16 @@ export const useGetUsers = () => {
   });
 };
 ```
+
+### 🧪 API 모킹 활용 (MSW)
+
+새로운 기능을 개발할 때 백엔드 API가 완성되지 않았다면 MSW를 활용하세요.
+
+1. **핸들러 작성**: `src/mocks/handlers/` 하위에 도메인별(예: `post.ts`) 핸들러를 정의합니다.
+2. **핸들러 등록**: `src/mocks/handlers/index.ts`의 `handlers` 배열에 추가합니다.
+3. **런타임 확인**: 브라우저 콘솔에 `[MSW] Mocking enabled.` 로그가 뜨면 성공입니다.
+
+**Tip:** 개발 모드(`development`)에서만 활성화되도록 `MSWInitializer`가 보호하고 있어 안전합니다.
 
 #### **Title (타이포그래피 위계)**
 
